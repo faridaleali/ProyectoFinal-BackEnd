@@ -21,11 +21,11 @@ app.get('/', (req, res) => {
 })
 
 //MongoDB conection
-/*
+
 mongoose
 	.connect(process.env.MONGODB_URI)
 	.then(() => console.log("Te has conectado a la base de datos"))
-	.catch((error) => console.log(error))*/
+	.catch((error) => console.log(error))
 
 
-app.listen(port, () => console.log('El servidor esta funcionando en el puerto', port))
+app.listen(port, () => console.log('El servidor esta funcionando en el puertso', port))
