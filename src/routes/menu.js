@@ -3,8 +3,9 @@ const router = express.Router();
 const productsSchema = require("../models/menu")
 
 // Crear nuevo menu
+
 router.post("/menu", (req, res) => {
-    
+
 	const product = productsSchema(req.body)
 
 	product
