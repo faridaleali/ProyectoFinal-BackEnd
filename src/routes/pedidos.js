@@ -3,12 +3,12 @@ const { check } = require('express-validator');
 const { esRolValido, usuarioExiste } = require('../helpers/db-validators');
 const { validarCampos } = require('../middlewares/validarCampos');
 const { validarJWT } = require('../middlewares/validar-jwt');
-const {pedidoGet, pedidoPost, pedidoPut, pedidoDelete}= require('../controllers/pedidos');
+const {pedidoGet, pedidosGet, pedidoPost, pedidoPut, pedidoDelete}= require('../controllers/pedidos');
 const { esAdminRole } = require('../middlewares/validar-roles');
 
 const router= Router();
 
-router.get('/',validarJWT, pedidoGet);
+router.get('/',validarJWT, pedidoGet, pedidosGet);
 
 router.post('/',[
   check('user','El usuario es obligatorio').notEmpty().isMongoId(),
