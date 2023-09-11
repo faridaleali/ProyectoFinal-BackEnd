@@ -1,9 +1,18 @@
-const express = require("express");
-const router = express.Router();
-const productsSchema = require("../models/menu")
+const { Router } = require("express");
+const router = Router();
+
+const productsSchema = require("../models/menu");
+const { menuesGet, menuPost, menuPut, menuDelete } = require("../controllers/menu");
 
 // Crear nuevo menu
+router.get("/menu", menuesGet);
+router.post("/menu", menuPost);
+router.put("/menu/:id", menuPut);
+router.delete("/menu/:id", menuDelete);
 
+
+
+/*
 router.post("/menu", (req, res) => {
 
 	const product = productsSchema(req.body)
@@ -78,7 +87,7 @@ router.delete("/menu/:id", async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: "Error interno del servidor" });
     }
-});
+});*/
 
 
 module.exports = router;
