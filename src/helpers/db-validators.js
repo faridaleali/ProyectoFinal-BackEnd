@@ -1,4 +1,6 @@
 const Menu = require('../models/menu');
+const Rol = require('../models/rol');
+const Categoria =require ('../models/categoria')
 
 //Validar nombre
 const nombreMenuExiste = async (name) => {
@@ -19,7 +21,27 @@ const menuIdExiste = async (id) => {
 
 }
 
+//Validar el rol del usuario
+const esRolValido = async (rol) => {
+    const existeRol = await Rol.findOne({rol})
+    if(!existeRol){
+        throw new Error(`El rol ${rol} no existe en la base de datos`);
+    }
+}
+
+//Validar si la categoria del menú  existe
+const categoriaExiste = async (id) => {
+    const existeCategoria = await Categoria.findById(id)
+
+    if(!existeCategoria){
+        throw new Error(`El id ${id} no corresponde a ninguna categoría registrada`);
+    }
+}
+
+
 module.exports = {
     nombreMenuExiste,
-    menuIdExiste
+    menuIdExiste,
+    esRolValido,
+    categoriaExiste
 }
