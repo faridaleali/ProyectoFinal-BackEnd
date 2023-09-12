@@ -3,29 +3,29 @@ const mongoose = require('mongoose');
 const productSchema = mongoose.Schema({
     name: {
         type: String,
-        require: true
+        required:[true, 'El nombre es obligatorio']
     },
     detail: {
         type: String,
-        require: true
+        required:[true, 'El detalle es obligatorio']
     },
     price: {
         type: Number,
-        require: true
+        required:[true, 'El precio es obligatorio']
     },
     active: {
         type: Boolean,
-        require: true
+        required: true
     },
     offer: {
         type: Boolean,
-        require: true
+        required:[true, 'El estado de oferta es obligatorio']
     },
     offerprice: {
         type: Number,
-        require: true
+        required:[true, 'El precio de oferta es obligatorio']
     },
     
 })
 
-module.exports = mongoose.model('Menu', productSchema) //Nombre que le vamos a pasar y el esquema
+module.exports = mongoose.model('Menu', productSchema)
