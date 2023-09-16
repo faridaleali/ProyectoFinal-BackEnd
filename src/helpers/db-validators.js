@@ -19,7 +19,17 @@ const menuIdExiste = async (id) => {
 
 }
 
+// validar si el pedido existe
+const orderExiste = async(id) => {
+    const existeOrder = await Order.findById(id)
+
+    if(!existeOrder){
+        throw new Error(`El id ${id} no corresponde a ningún pedido registrado`)
+    }
+}
+
 module.exports = {
     nombreMenuExiste,
-    menuIdExiste
+    menuIdExiste,
+    orderExiste
 }
