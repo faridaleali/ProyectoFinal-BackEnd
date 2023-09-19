@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 //get
 
-const usuariosGet = async (req=request, res=response) => {
+const getUsuarios = async (req=request, res=response) => {
     const datos = req.query;
     const query = {estado: true};
 
@@ -61,7 +61,7 @@ const putUsuario = async (req=request, res=response) => {
 
 //delete
 
-const usuarioDelete = async (req=request, res=response) => {
+const deleteUsuario = async (req=request, res=response) => {
     const {id} = req.params;
     
     const usuarioBorrado = await Usuario.findByIdAndDelete(id)
@@ -75,4 +75,11 @@ const usuarioDelete = async (req=request, res=response) => {
     })
 }
 
+module.exports = {
+    
+          getUsuarios,
+          postUsuario,
+          putUsuario,
+          deleteUsuario,
+}
 
