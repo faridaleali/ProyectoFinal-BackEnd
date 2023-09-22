@@ -1,14 +1,14 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { usuariosGet, usuarioPost, usuarioPut, usuarioDelete } = require('../src/controllers/usuarios');
-const { emailExiste, esRolValido, usuarioExiste } = require('../src/helpers/db-validators');
-const { validarCampos } = require('../src/middlewares/validarCampos');
-const { validarJWT } = require('../src/middlewares/validar-jwt');
-const { esAdminRole } = require('../src/middlewares/validar-roles');
+const { getUsuarios, postUsuario, putUsuario, deleteUsuario } = require('../controllers/usuario');
+const { emailExiste, esRolValido, usuarioExiste } = require('../helpers/db-validators');
+const { validarCampos } = require('../middlewares/validar-campos');
+const { validarJWT } = require('../middlewares/validar-jwt');
+const { esAdminRole } = require('../middlewares/validar-roles');
 
 const router = Router();
 
-router.get('/', usuariosGet);
+router.get('/', getUsuarios);
 
 router.post('/', 
     [
@@ -18,7 +18,7 @@ router.post('/',
         check('email').custom(emailExiste),
         validarCampos
     ],
-    usuarioPost);
+    postUsuario);
 
     router.put('/:id', 
     [
@@ -28,7 +28,7 @@ router.post('/',
         check('rol').custom(esRolValido),
         validarCampos
     ],
-    usuarioPut);
+    putUsuario);
 
 router.delete('/:id', 
     [
@@ -38,6 +38,6 @@ router.delete('/:id',
         check('id').custom(usuarioExiste),
         validarCampos
     ],
-    usuarioDelete);;
+    deleteUsuario);;
 
 module.exports = router;
