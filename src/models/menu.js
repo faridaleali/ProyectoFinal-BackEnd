@@ -28,4 +28,4 @@ const productSchema = mongoose.Schema({
     
 })
 
-module.exports = mongoose.model('Menu', productSchema)
+module.exports = mongoose.model('Menues', productSchema)
