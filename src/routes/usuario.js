@@ -20,7 +20,7 @@ router.post('/',
     ],
     postUsuario);
 
-    router.put('/:id', 
+router.put('/:id', 
     [
         validarJWT,
         check('id', "No es un ID válido").isMongoId(),
