@@ -7,6 +7,7 @@ class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
+        this.autentiPath = '/api/auth'
         this.menuPath = '/api/menu';
         this.pedidosPath = '/api/pedidos';
 
@@ -36,6 +37,7 @@ class Server{
     }
 
     routes(){
+        this.app.use(this.autentiPath, require('../routes/autenticador'))
         this.app.use(this.menuPath, require('../routes/menu'));
         this.app.use(this.pedidosPath, require('../routes/pedidos'));
     }

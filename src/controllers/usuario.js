@@ -76,7 +76,6 @@ const deleteUsuario = async (req=request, res=response) => {
 }
 
 module.exports = {
-    
     getUsuarios,
     postUsuario,
     putUsuario,
