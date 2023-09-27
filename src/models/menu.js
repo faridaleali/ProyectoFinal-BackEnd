@@ -13,19 +13,18 @@ const productSchema = mongoose.Schema({
         type: Number,
         required:[true, 'El precio es obligatorio']
     },
+    category: {
+        type: String,
+        required:[true, 'El estado de oferta es obligatorio']
+    },
+    image: {
+        type: String,
+        required:[true, 'El precio de oferta es obligatorio']
+    },
     active: {
         type: Boolean,
         required: true
-    },
-    offer: {
-        type: Boolean,
-        required:[true, 'El estado de oferta es obligatorio']
-    },
-    offerprice: {
-        type: Number,
-        required:[true, 'El precio de oferta es obligatorio']
-    },
-    
+    }
 })
 
 module.exports = mongoose.model('Menues', productSchema)
