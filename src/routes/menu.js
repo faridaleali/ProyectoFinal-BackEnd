@@ -14,8 +14,8 @@ router.post("/",
     check('name').custom(nombreMenuExiste),
     check('detail', 'La descripcion es obligatoria').notEmpty(),
     check('price', 'El precio es obligatorio').notEmpty(),
-    check('offer', '').notEmpty(),
-    check('offerprice', '').notEmpty(),
+    check('category', '').notEmpty(),
+    check('image', '').notEmpty(),
     validarCampos
 ], 
 menuPost);

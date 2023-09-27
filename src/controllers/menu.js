@@ -19,20 +19,20 @@ const menuesGet = async (req = request, res = response) => {
 
 const menuPost = async (req = request, res = response) => {
     const datos = req.body;
-    const { name, detail, price, active, offer, offerprice } = datos;
+    const { name, detail, price, category, image, active } = datos;
 
-    const productos = new Menu({ name, detail, price, active, offer, offerprice });
+    const productos = new Menu({ name, detail, price, category, image, active });
 
-	await productos
-		.save()
-		.then( (data) => res.json(data) )
-		.catch( (error) => res.json({
-			message: error
-		}));
-
-    res.json({
-        mensaje: "Menu de agregado al sistema con exito"
-    })
+    try {
+        const data = await productos.save();
+        res.json(data);
+    } 
+    catch (error) {
+        res.status(500).json({
+            error: "Error al agregar el menú al sistema",
+            message: error.message
+        });
+    }
 }
 
 const menuPut = async (req = request, res = response) => {
@@ -41,13 +41,13 @@ const menuPut = async (req = request, res = response) => {
     const { id } = req.params
 
     // Obtengo los valores a modificar
-    const { name, detail, price, active, offer, offerprice } = req.body
+    const { name, detail, price, category, image, active } = req.body
 
     // Modifico los valores
     /* No tengo nada*/
 
     // Busco el usuario y actualizo
-    const menu = await Menu.findByIdAndUpdate(id, name, detail, price, active, offer, offerprice, { new: true } )
+    const menu = await Menu.findByIdAndUpdate(id, name, detail, price, category, image, { new: true } )
 
 
     res.json({
