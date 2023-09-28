@@ -53,18 +53,29 @@ const getOrder = async (req = request, res = response) => {
 };
 
 // Crear un pedido
-const postOrder = async (req = request, res = response) => {
-  const { order, totalCost } = req.body;
-
+const postOrder = async (req, res) => {
   try {
-    // Obtén el usuario del token (ya que el usuario está autenticado)
+    const { order, totalCost, status } = req.body;
     const usuario = req.usuario;
 
-    // Crea un nuevo pedido con el usuario y la fecha automáticamente
+    if (!Array.isArray(order)) {
+      return res.status(400).json({ message: 'La orden debe ser un array de objetos.' });
+    }
+
+    const menuItems = order.map(menu => {
+      const { menuName, quantity } = menu;
+      return { menuName, quantity };
+    });
+
+    // Si no se proporciona un estado, establecerlo en "pendiente"
+    const orderStatus = status ? status.toLowerCase() : 'pendiente';
+
+    // Crear un nuevo pedido con el usuario y la fecha automáticamente
     const newOrder = new Order({
-      user: usuario._id, // Asigna el ID del usuario
-      order,
+      user: usuario._id,
+      order: menuItems,
       totalCost,
+      status: orderStatus,  // se usa el status proporcionado o 'Pendiente' si no se proporciona
     });
 
     // Guardar en la BD
@@ -79,6 +90,7 @@ const postOrder = async (req = request, res = response) => {
     res.status(500).json({ message: 'Hubo un error al crear el Pedido' });
   }
 };
+
 
 
 // Modificar el pedido
