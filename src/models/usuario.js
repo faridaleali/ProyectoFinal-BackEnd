@@ -7,7 +7,8 @@ const UsuarioSchema = Schema({
     },
     correo: {
         type: String, 
-        required:[true, 'El correo es obligatorio'], unique:true
+        required:[true, 'El correo es obligatorio'], 
+        unique:true
     },
     password: {
         type: String, 
@@ -17,7 +18,7 @@ const UsuarioSchema = Schema({
         type: String, 
         required: true
     },
-    direccion: {
+    direc: {
         type: String,
         required: true
     },
