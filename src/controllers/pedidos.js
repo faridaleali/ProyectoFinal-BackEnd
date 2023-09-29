@@ -96,16 +96,26 @@ const postOrder = async (req, res) => {
 // Modificar el pedido
 const putOrder = async (req = request, res = response) => {
   const { id } = req.params;
-  const { order, date, status, totalCost } = req.body;
+  const { order, status, totalCost } = req.body;
 
   try {
+
+  // Validar el ID del pedido
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+  return res.status(400).json({ message: 'ID de pedido no válido' });
+  }
+
+  // Validar la estructura de data
+  if (!order || !Array.isArray(order) || !status || !totalCost) {
+  return res.status(400).json({ message: 'La estructura de data es incorrecta' });
+  }
+
     // Datos a guardar
     let data = {
       order,
-      date,
       status,
       totalCost,
-      user: req.user._id,
+      user: req.usuario._id,
     };
     // Convertir el usuario a mayúsculas si se proporciona
     if (req.body.user) {
