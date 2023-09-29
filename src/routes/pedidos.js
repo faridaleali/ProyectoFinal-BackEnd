@@ -44,7 +44,7 @@ putOrder,
 
   // borrar un pedido por su ID
 router.delete('/:id',[
-  usuarioExiste,
+  // usuarioExiste,
   /* esRolValido, */
   validarJWT,
 ],
