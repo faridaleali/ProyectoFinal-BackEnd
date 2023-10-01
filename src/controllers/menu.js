@@ -41,13 +41,13 @@ const menuPut = async (req = request, res = response) => {
     const { id } = req.params
 
     // Obtengo los valores a modificar
-    const { name, detail, price, category, image, active } = req.body
+    const { name, detail, price, category, image } = req.body
 
     // Modifico los valores
     /* No tengo nada*/
 
     // Busco el usuario y actualizo
-    const menu = await Menu.findByIdAndUpdate(id, name, detail, price, category, image, { new: true } )
+    const menu = await Menu.findByIdAndUpdate(id, name, detail, price, category, image, {active: true}, { new: true } )
 
 
     res.json({
