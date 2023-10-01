@@ -18,7 +18,7 @@ const login = async (req=request, res=response) => {
 
     if(!usuario.estado) {
       return res.status(400).json({
-        msg: 'Correo o contraseña incorrectos - Usuario inactivo',
+        msg: 'Correo o contraseña incorrectos',
       })
     }
 

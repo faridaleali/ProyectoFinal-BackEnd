@@ -9,7 +9,7 @@ const getUsuarios = async (req=request, res=response) => {
 
     const [ total, usuarios ] = await Promise.all([
         Usuario.countDocuments(query), 
-        Usuario.find(query)
+        Usuario.find(query).select('_id nombre correo password rol direc estado') 
     ]);
 
     res.json({
