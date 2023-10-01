@@ -7,7 +7,7 @@ const menuesGet = async (req = request, res = response) => {
 
     const [ total, menues ] = await Promise.all([
         Menu.countDocuments(query),
-        Menu.find(query)
+        Menu.find(query).select('_id name detail price category image active') 
     ])
 
     res.json({
