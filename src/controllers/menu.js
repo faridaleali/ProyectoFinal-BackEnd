@@ -81,13 +81,13 @@ const menuPut = async (req, res) => {
       data.nombre = req.body.name.toUpperCase();
     }
   
-    const menu = await Curso.findByIdAndUpdate(id, data, { new: true });
+    const menu = await Menu.findByIdAndUpdate(id, data, { new: true });
   
     res.status(201).json({
       menu,
       msg: "El menu se actualizó",
     });
-  };
+};
 
 const menuDelete = async (req = request, res = response) => {
 
