@@ -81,7 +81,6 @@ const menuPut = async (req, res) => {
       data.nombre = req.body.name.toUpperCase();
     }
   
-    
     const menu = await Menu.findByIdAndUpdate(id, data, { new: true });
   
     res.status(201).json({
