@@ -40,19 +40,31 @@ const postUsuario = async (req=request, res=response) => {
 
 //put
 
-const putUsuario = async (req=request, res=response) => {
+const putUsuario = async ( req=request, res=response ) => {
     
-    const {id} = req.params
+    // Agarro el ID
+    const { id } = req.params
     
-    const {password, correo, ...resto} = req.body
+    // Obtengo los valores a modificar
+    const { nombre, correo, direc, password, rol, estado } = req.body
 
-    if(password){
+    let data = {
+        nombre,
+        correo,
+        password,
+        rol,
+        direc,
+        estado
+    }
+
+    /*if(password){
         const salt = bcrypt.genSaltSync(10);
         resto.password = bcrypt.hashSync(password, salt);
     }
-    resto.password = password;
 
-    const usuario = await Usuario.findByIdAndUpdate(id, resto, {new: true})
+    resto.password = password;*/
+
+    const usuario = await Usuario.findByIdAndUpdate(id, data, {new: true})
 
     res.json({
         mensaje: "Usuario actualizado",
