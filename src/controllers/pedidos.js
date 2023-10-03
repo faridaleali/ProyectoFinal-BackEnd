@@ -96,7 +96,7 @@ const postOrder = async (req, res) => {
 // Modificar el pedido
 const putOrder = async (req = request, res = response) => {
   const { id } = req.params;
-  const { order, status, totalCost } = req.body;
+  const {status} = req.body;
 
   try {
 
@@ -106,21 +106,20 @@ const putOrder = async (req = request, res = response) => {
   }
 
   // Validar la estructura de data
-  if (!order || !Array.isArray(order) || !status || !totalCost) {
-  return res.status(400).json({ message: 'La estructura de data es incorrecta' });
+  if (!status) {
+  return res.status(400).json({ message: 'El estado de la orden es obligatorio' });
+  }
+
+  // Verificar que el estado sea 'realizado' o 'pendiente'
+  if (status !== 'realizado' && status !== 'pendiente') {
+    return res.status(400).json({ message: 'El estado debe ser "realizado" o "pendiente"' });
   }
 
     // Datos a guardar
     let data = {
-      order,
       status,
-      totalCost,
-      user: req.usuario._id,
     };
-    // Convertir el usuario a mayúsculas si se proporciona
-    if (req.body.user) {
-      data.user = req.body.user.toUpperCase();
-    }
+
     // Encontrar y actualizar el pedido
     const pedido = await Order.findByIdAndUpdate(id, data, { new: true });
     if (!pedido) {
