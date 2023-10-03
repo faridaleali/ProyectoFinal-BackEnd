@@ -3,21 +3,22 @@ Este es el Backend para el sitio web Satorini Restaurante donde los usuarios pod
 
 # Para poder utilizar el proyecto en localhost en necesario clonarlo y tener algunos programas necesarios:
 
- Dependencias:
- bcrypt: ^5.1.1
- bcryptjs: ^2.4.3
- cors": ^2.8.5
- dotenv": ^16.3.1
- express: ^4.18.2
- express-validator: ^7.0.1
- jsonwebtoken": ^9.0.2
- mongoose: ^7.4.4
- devDependencies: 
- nodemon: ^3.0.1
- Nodejs v18.17.1 o Superior.
- IDE de desarrollo de tu comodidad Ej. VS Code
- PostMan para puebas de APIS. (Opcional)
- Git para poder gestionar las versiones.
+1. Dependencias:
+ -bcrypt: ^5.1.1
+ -bcryptjs: ^2.4.3
+ -cors": ^2.8.5
+ -dotenv": ^16.3.1
+ -express: ^4.18.2
+ -express-validator: ^7.0.1
+ -jsonwebtoken": ^9.0.2
+ -mongoose: ^7.4.4
+2. devDependencies: 
+ -nodemon: ^3.0.1
+ -Nodejs v18.17.1 o Superior.
+
+ -IDE de desarrollo de tu comodidad Ej. VS Code
+ -PostMan para puebas de APIS. (Opcional)
+ -Git para poder gestionar las versiones.
 
  # Configuración
 
