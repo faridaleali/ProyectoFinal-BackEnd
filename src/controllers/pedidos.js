@@ -10,7 +10,7 @@ const getOrders = async (req = request, res = response) => {
     const [total, orders] = await Promise.all([
       Order.countDocuments(query),
       Order.find(query).skip(Number(skip)).limit(Number(limit)),
-    ]); 
+    ]);
     res.json({
       message: 'Pedidos obtenidos',
       total,
@@ -33,7 +33,7 @@ const getOrder = async (req = request, res = response) => {
       })
       .populate({
         path: 'user',
-        model: Usuario, 
+        model: Usuario,
         select: 'nombre correo'
       });
 
@@ -62,8 +62,8 @@ const postOrder = async (req, res) => {
     }
 
     const menuItems = order.map(menu => {
-      const { name, quantity, id, price, category, image} = menu;
-      return {  name, quantity, id, price, category, image};
+      const { name, quantity, id, price, category, image } = menu;
+      return { name, quantity, id, price, category, image };
     });
 
     // Si no se proporciona un estado, establecerlo en "pendiente"
@@ -95,32 +95,29 @@ const postOrder = async (req, res) => {
 // Modificar el pedido
 const putOrder = async (req = request, res = response) => {
   const { id } = req.params;
-  const {status} = req.body;
+  const { status } = req.body;
 
   try {
 
-  // Validar el ID del pedido
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-  return res.status(400).json({ message: 'ID de pedido no válido' });
-  }
+    // Validar el ID del pedido
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'ID de pedido no válido' });
+    }
 
-  // Validar la estructura de data
-  if (!status) {
-  return res.status(400).json({ message: 'El estado de la orden es obligatorio' });
-  }
+    // Validar la estructura de data
+    if (!status) {
+      return res.status(400).json({ message: 'El estado de la orden es obligatorio' });
+    }
 
-  // Verificar que el estado sea 'realizado' o 'pendiente'
-  if (status !== 'realizado' && status !== 'pendiente') {
-    return res.status(400).json({ message: 'El estado debe ser "realizado" o "pendiente"' });
-  }
+    // Verificar que el estado sea 'realizado' o 'pendiente'
+    if (status !== 'realizado' && status !== 'pendiente') {
+      return res.status(400).json({ message: 'El estado debe ser "realizado" o "pendiente"' });
+    }
 
     // Datos a guardar
-    let data = {
-      status,
-    };
 
     // Encontrar y actualizar el pedido
-    const pedido = await Order.findByIdAndUpdate(id, data, { new: true });
+    const pedido = await Order.findByIdAndUpdate(id, status, { new: true });
     if (!pedido) {
       return res.status(404).json({ message: 'Pedido no encontrado' });
     }
