@@ -1,8 +1,12 @@
 const {Schema, model}= require('mongoose')
 // define la estructura de cada objeto en el array order
 const menuItemSchema = new Schema({
-  menuName: { type: String, required: true },
+  id:{type:Number,required:[true]},
+  name: {type: String,required:[true]},
   quantity: { type: Number, required: true },
+  price: {type: Number,required:[true]},
+  category: {type: String,required:[true]},
+  image: {type: String,required:[true]}
 });
 // Aqui se especifica que se pide para pedidos
 const OrderSchema = Schema({
