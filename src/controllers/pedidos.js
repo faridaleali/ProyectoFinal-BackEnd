@@ -63,8 +63,8 @@ const postOrder = async (req, res) => {
     }
 
     const menuItems = order.map(menu => {
-      const { menuName, quantity } = menu;
-      return { menuName, quantity };
+      const { name, quantity, id, price, category, image} = menu;
+      return {  name, quantity, id, price, category, image};
     });
 
     // Si no se proporciona un estado, establecerlo en "pendiente"
