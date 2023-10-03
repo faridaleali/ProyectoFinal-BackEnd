@@ -1,22 +1,15 @@
 const { response, request } = require('express');
 const Order = require('../models/pedidos');
-const { generarJWT } = require('../helpers/generar-jwt');
+const Usuario = require('../models/usuario');
 
 // Obtener todos los pedidos
 const getOrders = async (req = request, res = response) => {
   try {
     const { limit = 8, skip = 0 } = req.query;
-    const query = { estado: 'pendiente' };
+    const query = { status: 'pendiente' };
     const [total, orders] = await Promise.all([
       Order.countDocuments(query),
-      Order.find(query)
-        .skip(Number(skip))
-        .limit(Number(limit))
-        .populate({
-          path: 'order',
-          select: 'date status totalCost',
-        })
-        .populate('user'),
+      Order.find(query).skip(Number(skip)).limit(Number(limit)),
     ]);
     res.json({
       message: 'Pedidos obtenidos',
@@ -29,6 +22,7 @@ const getOrders = async (req = request, res = response) => {
   }
 };
 
+
 // Obtener un pedido por ID
 const getOrder = async (req = request, res = response) => {
   const { id } = req.params;
@@ -38,10 +32,16 @@ const getOrder = async (req = request, res = response) => {
         path: 'order',
         select: 'date status totalCost',
       })
-      .populate('user');
+      .populate({
+        path: 'user',
+        model: Usuario, 
+        select: 'nombre correo'
+      });
+
     if (!pedido) {
       return res.status(404).json({ message: 'Pedido no encontrado' });
     }
+
     res.json({
       message: 'Pedido obtenido',
       order: pedido,
