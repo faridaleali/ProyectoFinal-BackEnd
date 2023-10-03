@@ -38,8 +38,8 @@ Este es el Backend para el sitio web Satorini Restaurante donde los usuarios pod
 
 # Uso
 
-1. Inicia el servidor: `npm run start`
-2. Accede a la API en `https://backend-rolling53i.onrender.com`
+1. Inicia el servidor: npm run start
+2. Accede a la API en https://backend-rolling53i.onrender.com
 3. Rutas disponibles:
    
 
