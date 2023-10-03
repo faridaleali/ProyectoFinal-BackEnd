@@ -10,7 +10,7 @@ const getOrders = async (req = request, res = response) => {
     const [total, orders] = await Promise.all([
       Order.countDocuments(query),
       Order.find(query).skip(Number(skip)).limit(Number(limit)),
-    ]);
+    ]); 
     res.json({
       message: 'Pedidos obtenidos',
       total,
@@ -21,7 +21,6 @@ const getOrders = async (req = request, res = response) => {
     res.status(500).json({ message: 'Hubo un error al obtener los Pedidos' });
   }
 };
-
 
 // Obtener un pedido por ID
 const getOrder = async (req = request, res = response) => {
