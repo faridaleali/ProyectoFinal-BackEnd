@@ -6,23 +6,18 @@ const { getOrders, getOrder, postOrder, putOrder, deleteOrder, } = require('../c
 
 const router = Router();
 
-// Aplica validarJWT a todas las rutas de pedidos
 router.use(validarJWT);
 
-// Obtener todos los pedidos
 router.get('/', validarJWT, getOrders);
 
-// Obtener un pedido por su ID
 router.get('/:id', validarJWT, getOrder);
 
-// crear un pedido
 router.post('/', [
   check('order', 'La orden es obligatoria').isLength({ min: 4, max: 40 }),
   check('totalCost', 'El Costo Total es obligatorio').isNumeric().notEmpty(),
   validarCampos,
 ], postOrder);
 
-// modificar un pedido por su ID
 router.put('/:id', 
 [
   check('id', 'El ID no existe').isMongoId(),
@@ -30,8 +25,6 @@ router.put('/:id',
   validarCampos,
 ], putOrder);
 
-
-// borrar un pedido por su ID
 router.delete('/:id', [
   validarJWT,
 ],

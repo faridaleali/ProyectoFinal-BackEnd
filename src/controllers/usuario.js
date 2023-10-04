@@ -19,8 +19,6 @@ const getUsuarios = async (req=request, res=response) => {
     })
 }
 
-//post
-
 const postUsuario = async (req=request, res=response) => {
     const datos = req.body;
     const { nombre, correo, password, rol, direc } = datos;
@@ -38,14 +36,9 @@ const postUsuario = async (req=request, res=response) => {
     })
 }
 
-//put
-
 const putUsuario = async ( req=request, res=response ) => {
     
-    // Agarro el ID
     const { id } = req.params
-    
-    // Obtengo los valores a modificar
     const { nombre, correo, direc, password, rol, estado } = req.body
 
     let data = {
@@ -57,13 +50,6 @@ const putUsuario = async ( req=request, res=response ) => {
         estado
     }
 
-    /*if(password){
-        const salt = bcrypt.genSaltSync(10);
-        resto.password = bcrypt.hashSync(password, salt);
-    }
-
-    resto.password = password;*/
-
     const usuario = await Usuario.findByIdAndUpdate(id, data, {new: true})
 
     res.json({
@@ -71,8 +57,6 @@ const putUsuario = async ( req=request, res=response ) => {
         usuario,
     })
 }
-
-//delete
 
 const deleteUsuario = async (req=request, res=response) => {
     const {id} = req.params;

@@ -2,7 +2,6 @@ const Menu = require('../models/menu');
 const Usuario = require('../models/usuario');
 const Order= require('../models/pedidos');
 
-//Validar nombre
 const nombreMenuExiste = async (name) => {
     const existeNombre = await Menu.findOne( { name } )
 
@@ -11,7 +10,6 @@ const nombreMenuExiste = async (name) => {
     }
 }
 
-//Validar si existe el menu
 const menuIdExiste = async (id) => {
     const existeMenu = await Menu.findById(id)
 
@@ -21,7 +19,6 @@ const menuIdExiste = async (id) => {
 
 }
 
-// validar si el pedido existe
 const orderExiste = async(id) => {
     const existeOrder = await Order.findById(id)
 
@@ -30,7 +27,6 @@ const orderExiste = async(id) => {
     }
 }
 
-//validar si el usuario con el id pasado existe
 const usuarioExiste = async(id) => {
     const existeUsuario = await Usuario.findById(id)
 
@@ -39,7 +35,6 @@ const usuarioExiste = async(id) => {
     }
 }
 
-//Validar Rol
 const esRolValido = async (rol) => {
     const existeRol = await Rol.findOne({rol})
     if(!existeRol){
@@ -47,7 +42,6 @@ const esRolValido = async (rol) => {
     }
 }
 
-//Validar email
 const emailExiste = async (correo) => {
     const existeEmail = await Usuario.findOne({correo});
     if(existeEmail){
