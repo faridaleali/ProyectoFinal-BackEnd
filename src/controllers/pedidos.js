@@ -1,6 +1,7 @@
 const { response, request } = require('express');
 const Order = require('../models/pedidos');
 const Usuario = require('../models/usuario');
+const mongoose = require('mongoose')
 
 // Obtener todos los pedidos
 const getOrders = async (req = request, res = response) => {
@@ -94,10 +95,14 @@ const postOrder = async (req, res) => {
 
 // Modificar el pedido
 const putOrder = async (req = request, res = response) => {
-  const { id } = req.params;
-  const { status } = req.body;
 
   try {
+
+    // Agarro el ID
+    const { id } = req.params;
+
+    // Obtengo los valores a modificar
+    const { status } = req.body;
 
     // Validar el ID del pedido
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -118,9 +123,11 @@ const putOrder = async (req = request, res = response) => {
 
     // Encontrar y actualizar el pedido
     const pedido = await Order.findByIdAndUpdate(id, status, { new: true });
+
     if (!pedido) {
       return res.status(404).json({ message: 'Pedido no encontrado' });
     }
+
     res.status(201).json({
       order: pedido,
       message: 'El pedido se actualizó',
