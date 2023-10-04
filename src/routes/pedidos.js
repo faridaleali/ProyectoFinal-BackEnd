@@ -23,7 +23,9 @@ router.post('/', [
 ], postOrder);
 
 // modificar un pedido por su ID
-router.put('/:id', [
+router.put('/:id', 
+[
+  check('id', 'El ID no existe').isMongoId(),
   check('status', 'El estado es obligatorio').notEmpty(),
   validarCampos,
 ], putOrder);

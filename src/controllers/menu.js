@@ -35,30 +35,6 @@ const menuPost = async (req = request, res = response) => {
     }
 }
 
-/*const menuPut = async (req = request, res = response) => {
-
-    // Agarro el ID
-    const { id } = req.params
-
-    // Obtengo los valores a modificar
-    const { name, detail, price, category, image } = req.body
-
-    // Modifico los valores
-
-    // Busco el usuario y actualizo
-    const menu = await Menu.findByIdAndUpdate(id, name, detail, price, category, image, {active: true}, { new: true } )
-
-    if (!menu) {
-        return res.status(404).json({ mensaje: "Menu no encontrado" });
-    }
-
-
-    res.json({
-        mensaje: "Menu de modificado del sistema con exito",
-        menu
-    })
-}*/
-
 const menuPut = async (req, res) => {
 
     // Agarro el ID
@@ -88,6 +64,49 @@ const menuPut = async (req, res) => {
       msg: "El menu se actualizó",
     });
 };
+
+/*
+
+const menuPut = async (req, res) => {
+  try {
+    // Agarro el ID
+    const { id } = req.params;
+
+    // Obtengo los valores a modificar
+    const { name, detail, price, category, image, active } = req.body;
+
+    let data = {
+      name,
+      detail,
+      price,
+      category,
+      image,
+      active,
+    };
+
+    // Si viene el nombre, lo guardamos con mayúscula
+    if (req.body.name) {
+      data.nombre = req.body.name.toUpperCase();
+    }
+
+    const menu = await Menu.findByIdAndUpdate(id, data, { new: true });
+
+    if (!menu) {
+      return res.status(404).json({ message: 'Menú no encontrado' });
+    }
+
+    res.status(201).json({
+      menu,
+      msg: 'El menú se actualizó',
+    });
+  } catch (error) {
+    console.error('Error al modificar el menú', error);
+    res.status(500).json({ message: 'Hubo un error al modificar el menú' });
+  }
+};
+
+
+*/
 
 const menuDelete = async (req = request, res = response) => {
 
