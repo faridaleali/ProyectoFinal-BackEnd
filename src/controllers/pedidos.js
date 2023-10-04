@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const getOrders = async (req = request, res = response) => {
   try {
     const { limit = 8, skip = 0 } = req.query;
-    const query = { status: 'pendiente' };
+    const query = { status: { $in: ['pendiente', 'realizado'] } };
     const [total, orders] = await Promise.all([
       Order.countDocuments(query),
       Order.find(query).skip(Number(skip)).limit(Number(limit)),
