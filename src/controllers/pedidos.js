@@ -120,9 +120,12 @@ const putOrder = async (req = request, res = response) => {
     }
 
     // Datos a guardar
+    let data = {
+      status
+    }
 
     // Encontrar y actualizar el pedido
-    const pedido = await Order.findByIdAndUpdate(id, status, { new: true });
+    const pedido = await Order.findByIdAndUpdate(id, data, { new: true });
 
     if (!pedido) {
       return res.status(404).json({ message: 'Pedido no encontrado' });
