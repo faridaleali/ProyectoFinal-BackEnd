@@ -1,64 +1,62 @@
-# ProyectoFinal-BackEnd Santorini Restaurante
+# Proyecto React - Pagina de Restaurante
 
-Este es el Backend para el sitio web Satorini Restaurante donde los usuarios podran realizar las tareas de crear, actualizar, consultar y eliminar usuarios, pedidos y los distintos menús de dicho lugar gastronómico. 
+## Nombre del Proyecto
+Santorini Restaurant.
 
-# Para poder utilizar el proyecto en localhost en necesario clonarlo y tener algunos programas necesarios:
+## Descripción
+Hemos desarrollado una completa plataforma de comercio electrónico desde cero, dedicada a un restaurante llamado 'Santorini'. Esta plataforma incluye tanto el frontend como el backend, proporcionando a los usuarios una experiencia de pedido de comida sin igual. Los clientes pueden explorar el menú, seleccionar sus platos favoritos, especificar la cantidad deseada y enviar sus pedidos para su procesamiento por parte del restaurante.
 
-# Dependencias:
+Además, hemos implementado un sistema de autenticación de usuarios que permite a los clientes identificarse y acceder a sus cuentas personalizadas. También hemos diseñado una página de administración que facilita la gestión de usuarios, productos y pedidos. Esta herramienta de administración brinda un control total sobre la plataforma, lo que permite una gestión eficiente y una experiencia de usuario excepcional.
 
-1.	bcrypt: ^5.1.1
-2.	bcryptjs: ^2.4.3
-3.	cors: ^2.8.5
-4.	dotenv: ^16.3.1
-5.	express: ^4.18.2
-6.	express-validator: ^7.0.1
-7.	jsonwebtoken: ^9.0.2
-8.	mongoose: ^7.4.4
+## Tecnologías Utilizadas
+* React
+* Bootstrap
+* Node.js
+* Express
+* MongoDB
 
-   
  # devDependencies: 
  
-1. nodemon: ^3.0.1
-2. Nodejs v18.17.1 o Superior
-3. bcryptjs: ^2.4.3
+* JsonWebToken
+* Bcrypt
+* Bcryptjs
+* Cors
+* Dotenv
+* Express-validator
+* Mongoose
 
-    
- # Programas
+## Estructura de Carpetas
+Se estructuro las carpetas ramas: Assets, para poner imagenes y demas recursos; Componentes, para trabajar cada componente por separado; Pages, para diseñar la estructura de cada pagina; Routes, donde se definio rutas privadas.
 
-1.	IDE de desarrollo de tu comodidad Ej. VS Code
-2.	PostMan para puebas de APIS. (Opcional)
-3.	Git para poder gestionar las versiones.
+## Licencia
+Licencia MIT
+
+Copyright (c) 2023 Comision 53i Rolling Code
+
+Se concede permiso, de forma gratuita, a cualquier persona que obtenga una copia de este software y de los archivos de documentación asociados (el "Software"), para tratar el Software sin restricción, incluyendo, sin limitación, los derechos para usar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar y/o vender copias del Software, y permitir a las personas a las que se les proporcione el Software a hacerlo, sujeto a las siguientes condiciones:
+
+El aviso de copyright anterior y este aviso de permiso se incluirán en todas las copias o partes sustanciales del Software.
+
+EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUYENDO PERO NO LIMITADO A LAS GARANTÍAS DE COMERCIABILIDAD, IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO LOS AUTORES O TITULARES DE DERECHOS DE AUTOR SERÁN RESPONSABLES POR CUALQUIER RECLAMO, DAÑOS U OTRA RESPONSABILIDAD, YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O DE OTRA MANERA, DERIVADA DE, FUERA DE O EN RELACIÓN CON EL SOFTWARE O EL USO U OTROS TRATOS EN EL SOFTWARE.
 
 
- # Configuración
 
-1.	Clona este repositorio: git clone https://github.com/faridaleali/ProyectoFinal-BackEnd.git
-2.	Navega al directorio del proyecto: cd ProyectoFinal-BackEnd`Instala las dependencias: `npm install`
-3.	Configura las variables de entorno en un archivo .env
+## Agradecimientos
+Agradecemos a todos aquellos que fueron parte de nuestro proyecto. Fue un viaje gratificante que no habría sido posible sin el trabajo y la dedicación de todo el equipo.
 
-# Uso
+Agradecemos a cada miembro del equipo por su compromiso y su esfuerzo para hacer realidad este proyecto. Cada uno aportó su creatividad, experiencia y pasión, lo que se refleja en el éxito del proyecto.
 
-1. Inicia el servidor: npm run start
-2. Accede a la API en https://backend-rolling53i.onrender.com
-3. Rutas disponibles:
-   
+Finalmente, queremos destacar la importancia de la colaboración de profesores y Mentores que nos acompañaron.
 
-o	https://backend-rolling53i.onrender.com/api/auth/login : Para el logueo de los usuarios
+¡Gracias a todos por ser parte de esta increíble aventura!"
 
-o	https://backend-rolling53i.onrender.com/api/usuarios : Permite crear, modificar, consultar y eliminar los usuarios
 
-o	https://backend-rolling53i.onrender.com/api/menu : Permite crear, modificar, consultar y eliminar los distintos menues del restaurante
+## Integrantes
 
-o	https://backend-rolling53i.onrender.com/api/pedidos : permite crear los pedidos
-
-# Autores
-
-•	Farid Ale Ali
-•	Milagros Rodriguez
-•	Nancy Guaranca
-•	Luis Chehin
-•	Pia Lopez
-•	Mario Nassahel Elias
-•	Lautaro Hidalgo
-
-  
+* Ale Ali, Farid.
+* Chehin, Luis.
+* Elias, Nassahel.
+* Lopez, Pia.
+* Rodriguez, Milagro.
+* Guaranca, Nancy.
+* Hidalgo, Lautaro

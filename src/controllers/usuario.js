@@ -19,8 +19,6 @@ const getUsuarios = async (req=request, res=response) => {
     })
 }
 
-//post
-
 const postUsuario = async (req=request, res=response) => {
     const datos = req.body;
     const { nombre, correo, password, rol, direc } = datos;
@@ -37,8 +35,6 @@ const postUsuario = async (req=request, res=response) => {
         mensaje: "Usuario creado correctamente",
     })
 }
-
-//put
 
 const putUsuario = async ( req=request, res=response ) => {
     
