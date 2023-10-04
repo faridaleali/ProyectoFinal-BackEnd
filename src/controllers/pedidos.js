@@ -3,7 +3,6 @@ const Order = require('../models/pedidos');
 const Usuario = require('../models/usuario');
 const mongoose = require('mongoose')
 
-// Obtener todos los pedidos
 const getOrders = async (req = request, res = response) => {
   try {
     const { limit = 8, skip = 0 } = req.query;
@@ -23,7 +22,6 @@ const getOrders = async (req = request, res = response) => {
   }
 };
 
-// Obtener un pedido por ID
 const getOrder = async (req = request, res = response) => {
   const { id } = req.params;
   try {
@@ -52,7 +50,6 @@ const getOrder = async (req = request, res = response) => {
   }
 };
 
-// Crear un pedido
 const postOrder = async (req, res) => {
   try {
     const { order, totalCost, status } = req.body;
@@ -67,18 +64,15 @@ const postOrder = async (req, res) => {
       return { name, quantity, id, price, category, image };
     });
 
-    // Si no se proporciona un estado, establecerlo en "pendiente"
     const orderStatus = status ? status.toLowerCase() : 'pendiente';
 
-    // Crear un nuevo pedido con el usuario y la fecha automáticamente
     const newOrder = new Order({
       user: usuario._id,
       order: menuItems,
       totalCost,
-      status: orderStatus,  // se usa el status proporcionado o 'Pendiente' si no se proporciona
+      status: orderStatus,
     });
 
-    // Guardar en la BD
     await newOrder.save();
 
     res.status(201).json({
@@ -91,40 +85,29 @@ const postOrder = async (req, res) => {
   }
 };
 
-
-
-// Modificar el pedido
 const putOrder = async (req = request, res = response) => {
 
   try {
 
-    // Agarro el ID
     const { id } = req.params;
-
-    // Obtengo los valores a modificar
     const { status } = req.body;
 
-    // Validar el ID del pedido
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: 'ID de pedido no válido' });
     }
 
-    // Validar la estructura de data
     if (!status) {
       return res.status(400).json({ message: 'El estado de la orden es obligatorio' });
     }
 
-    // Verificar que el estado sea 'realizado' o 'pendiente'
     if (status !== 'realizado' && status !== 'pendiente') {
       return res.status(400).json({ message: 'El estado debe ser "realizado" o "pendiente"' });
     }
 
-    // Datos a guardar
     let data = {
       status
     }
 
-    // Encontrar y actualizar el pedido
     const pedido = await Order.findByIdAndUpdate(id, data, { new: true });
 
     if (!pedido) {
@@ -141,7 +124,6 @@ const putOrder = async (req = request, res = response) => {
   }
 };
 
-// Borrar el pedido (inactivar)
 const deleteOrder = async (req = request, res = response) => {
   const { id } = req.params;
   try {

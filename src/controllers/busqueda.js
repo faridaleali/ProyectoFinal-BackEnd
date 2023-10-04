@@ -1,14 +1,10 @@
 const { response, request } = require('express');
-
-//Importar los modelos
 const Usuario = require('../models/usuario');
 const Pedidos = require('../models/pedidos');
 const Menu = require('../models/menu');
 
-//Definir las coleciones permitidas
 const coleccionesPermitidas = ['usuarios', 'pedidos', 'menu'];
 
-//Buscar usuarios
 const buscarUsuarios = async (termino, res = response) => {
     const regex = new RegExp(termino, "i");
 
@@ -23,7 +19,6 @@ const buscarUsuarios = async (termino, res = response) => {
     })
 }
 
-//Buscar Categorias
 const buscarPedidos = async (termino, res = response) => {
     const regex = new RegExp(termino, "i");
 
@@ -37,7 +32,6 @@ const buscarPedidos = async (termino, res = response) => {
     })
 }
 
-//Buscar Cursos
 const buscarMenu = async (termino, res = response) => {
     const regex = new RegExp(termino, "i");
 
@@ -51,18 +45,15 @@ const buscarMenu = async (termino, res = response) => {
     })
 }
 
-//Funcion principal para las búsquedas
 const buscar = (req=request, res=response) => {
     const {coleccion, termino } = req.params;
 
-    //Validar la colección
     if(!coleccionesPermitidas.includes(coleccion)){
         return res.status(400).json({
             msg: `Las colecciones permitidas son: ${coleccionesPermitidas}`,
         });
     }
 
-    //En función de la colección, buscar por el termino
     switch(coleccion){
         case 'usuarios':
             buscarUsuarios(termino, res);

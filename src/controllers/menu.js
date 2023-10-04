@@ -37,10 +37,7 @@ const menuPost = async (req = request, res = response) => {
 
 const menuPut = async (req, res) => {
 
-    // Agarro el ID
     const { id } = req.params;
-
-    // Obtengo los valores a modificar
     const { name, detail, price, category, image, active } = req.body;
   
     let data = {
@@ -51,8 +48,7 @@ const menuPut = async (req, res) => {
       image,
       active
     };
-  
-    //si viene el nombre lo guardamos con mayúscula
+
     if (req.body.name) {
       data.nombre = req.body.name.toUpperCase();
     }
@@ -67,20 +63,7 @@ const menuPut = async (req, res) => {
 
 const menuDelete = async (req = request, res = response) => {
 
-    // Agarro el ID
     const { id } = req.params;
-
-    // Eliminar de la base de datos
-
-    /* 
-    
-    No vamos a usar este metodo
-    const menu = await Menu.findByIdAndDelete(id);
-    
-    */
-
-    // Cambiar a estado false
-
     const menu = await Menu.findById(id)
 
     if(!menu.active) {
