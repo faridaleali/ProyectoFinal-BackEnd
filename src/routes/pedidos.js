@@ -1,10 +1,10 @@
-const {Router}=require('express');
+const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
-const {getOrders,getOrder,postOrder,putOrder,deleteOrder,}= require('../controllers/pedidos');
+const { getOrders, getOrder, postOrder, putOrder, deleteOrder, } = require('../controllers/pedidos');
 
-const router= Router();
+const router = Router();
 
 // Aplica validarJWT a todas las rutas de pedidos
 router.use(validarJWT);
@@ -16,27 +16,23 @@ router.get('/', validarJWT, getOrders);
 router.get('/:id', validarJWT, getOrder);
 
 // crear un pedido
-router.post('/',  [
+router.post('/', [
   check('order', 'La orden es obligatoria').isLength({ min: 4, max: 40 }),
   check('totalCost', 'El Costo Total es obligatorio').isNumeric().notEmpty(),
   validarCampos,
 ], postOrder);
 
 // modificar un pedido por su ID
-router.put('/:id',[
-  check('order', 'El menú es obligatorio').notEmpty().isLength({min:4,max:40}),
+router.put('/:id', [
   check('status', 'El estado es obligatorio').notEmpty(),
-  check('totalCost', 'El Costo Total es obligatorio').isNumeric().notEmpty(),
-  validarCampos,  
-], 
-putOrder, 
-  );
+  validarCampos,
+], putOrder);
 
-  // borrar un pedido por su ID
-router.delete('/:id',[
+// borrar un pedido por su ID
+router.delete('/:id', [
   validarJWT,
 ],
-deleteOrder,
+  deleteOrder,
 );
 
-module.exports= router;
+module.exports = router;
