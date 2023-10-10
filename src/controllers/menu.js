@@ -2,31 +2,35 @@ const { request, response } = require('express');
 const Menu = require('../models/menu');
 
 const menuesGet = async (req = request, res = response) => {
-    const datos = req.query
-    const query = { active: true }
+    try {
+        const datos = req.query
+        const query = { active: true }
 
-    const [ total, menues ] = await Promise.all([
-        Menu.countDocuments(query),
-        Menu.find(query).select('_id name detail price category image active') 
-    ])
+        const [total, menues] = await Promise.all([
+            Menu.countDocuments(query),
+            Menu.find(query).select('_id name detail price category image active')
+        ])
 
-    res.json({
-        mensaje: "Menues de obtenido del sistema",
-        total,
-        menues
-    })
+        res.json({
+            mensaje: "Menues obtenidos del sistema",
+            total,
+            menues
+        });
+    } catch (error) {
+        console.error("Ocurrió un error:", error);
+        res.status(500).json({ mensaje: "Error al obtener los menues" });
+    }
 }
 
 const menuPost = async (req = request, res = response) => {
-    const datos = req.body;
-    const { name, detail, price, category, image, active } = datos;
-
-    const productos = new Menu({ name, detail, price, category, image, active });
-
     try {
+        const datos = req.body;
+        const { name, detail, price, category, image, active } = datos;
+
+        const productos = new Menu({ name, detail, price, category, image, active });
         const data = await productos.save();
         res.json(data);
-    } 
+    }
     catch (error) {
         res.status(500).json({
             error: "Error al agregar el menú al sistema",
@@ -36,48 +40,64 @@ const menuPost = async (req = request, res = response) => {
 }
 
 const menuPut = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, detail, price, category, image, active } = req.body;
 
-    const { id } = req.params;
-    const { name, detail, price, category, image, active } = req.body;
-  
-    let data = {
-      name,
-      detail,
-      price,
-      category,
-      image,
-      active
-    };
+        const updatedData = {
+            name: name ? name.toUpperCase() : undefined,
+            detail,
+            price,
+            category,
+            image,
+            active
+        };
 
-    if (req.body.name) {
-      data.nombre = req.body.name.toUpperCase();
+        const menu = await Menu.findByIdAndUpdate(id, updatedData, { new: true });
+
+        if (!menu) {
+            return res.status(404).json({ msg: "Menu no encontrado" });
+        }
+
+        res.status(200).json({
+            menu,
+            msg: "El menu se actualizó",
+        });
+    } catch (error) {
+        console.error("Error al actualizar el menú:", error);
+        res.status(500).json({ msg: "Error al actualizar el menú" });
     }
-  
-    const menu = await Menu.findByIdAndUpdate(id, data, { new: true });
-  
-    res.status(201).json({
-      menu,
-      msg: "El menu se actualizó",
-    });
 };
 
-const menuDelete = async (req = request, res = response) => {
+const menuDelete = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const menu = await Menu.findById(id);
 
-    const { id } = req.params;
-    const menu = await Menu.findById(id)
+        if (!menu) {
+            return res.status(404).json({
+                mensaje: "El menú no existe en el sistema"
+            });
+        }
 
-    if(!menu.active) {
-        return res.json({
-            mensaje: "El menu no existe en el sistema"
-        })
+        if (!menu.active) {
+            return res.json({
+                mensaje: "El menú ya está desactivado"
+            });
+        }
+
+        const menuDesactivado = await Menu.findByIdAndUpdate(id, { active: false }, { new: true });
+
+        res.json({
+            mensaje: "Menú eliminado del sistema con éxito",
+            menuDesactivado
+        });
+    } catch (error) {
+        console.error("Error al eliminar el menú:", error);
+        res.status(500).json({
+            mensaje: "Error al eliminar el menú"
+        });
     }
-
-    const menuDesactivado = await Menu.findByIdAndUpdate(id, { active: false }, { new: true } )
-
-    res.json({
-        mensaje: "Menu de eliminado del sistema con exito",
-        menuDesactivado
-    })
 }
 
 module.exports = {
