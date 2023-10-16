@@ -45,7 +45,7 @@ const menuPut = async (req, res) => {
         const { name, detail, price, category, image, active } = req.body;
 
         const updatedData = {
-            name: name ? name.toUpperCase() : undefined,
+            name,
             detail,
             price,
             category,
