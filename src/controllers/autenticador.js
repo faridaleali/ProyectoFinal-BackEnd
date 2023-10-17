@@ -22,6 +22,7 @@ const login = async (req=request, res=response) => {
       })
     }
 
+    
     if(!validPassword) {
       return res.status(400).json({
         msg: 'Correo o contraseña incorrecto',
