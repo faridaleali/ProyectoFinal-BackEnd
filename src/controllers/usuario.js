@@ -4,16 +4,11 @@ const bcrypt = require('bcryptjs');
 
 const getUsuarios = async (req = request, res = response) => {
     try {
-        const datos = req.query;
-
-        const [total, usuarios] = await Promise.all([
-            Usuario.countDocuments(query),
-            Usuario.find(query).select('_id nombre correo rol direc estado')
-        ]);
+        const usuarios = await Usuario.find().select('_id nombre correo rol direc estado');
 
         res.status(200).json({
             message: "Usuarios obtenidos exitosamente",
-            totalUsuarios: total,
+            totalUsuarios: usuarios.length,
             usuarios: usuarios
         });
     } catch (error) {
@@ -23,6 +18,7 @@ const getUsuarios = async (req = request, res = response) => {
         });
     }
 };
+
 
 const postUsuario = async (req = request, res = response) => {
     try {
