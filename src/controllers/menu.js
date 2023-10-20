@@ -1,26 +1,21 @@
 const { request, response } = require('express');
 const Menu = require('../models/menu');
 
-const menuesGet = async (req = request, res = response) => {
+const menuesGet = async (req, res) => {
     try {
-        const datos = req.query
-        const query = { active: true }
+        const menues = await Menu.find().select('_id name detail price category image active');
 
-        const [total, menues] = await Promise.all([
-            Menu.countDocuments(query),
-            Menu.find(query).select('_id name detail price category image active')
-        ])
-
-        res.json({
+        res.status(200).json({
             mensaje: "Menues obtenidos del sistema",
-            total,
-            menues
+            total: menues.length,
+            menues: menues
         });
     } catch (error) {
         console.error("Ocurrió un error:", error);
         res.status(500).json({ mensaje: "Error al obtener los menues" });
     }
 }
+
 
 const menuPost = async (req = request, res = response) => {
     try {
