@@ -5,15 +5,11 @@ const mongoose = require('mongoose')
 
 const getOrders = async (req = request, res = response) => {
   try {
-    const {skip = 0 } = req.query;
+    const { skip = 0 } = req.query;
     const query = { status: { $in: ['pendiente', 'realizado'] } };
-    const [total, orders] = await Promise.all([
-      Order.countDocuments(query),
-      Order.find(query).skip(Number(skip)).limit(Number(limit)),
-    ]);
+    const orders = await Order.find(query).skip(Number(skip));
     res.json({
       message: 'Pedidos obtenidos',
-      total,
       orders,
     });
   } catch (error) {
@@ -21,6 +17,7 @@ const getOrders = async (req = request, res = response) => {
     res.status(500).json({ message: 'Hubo un error al obtener los Pedidos' });
   }
 };
+
 
 const getOrder = async (req = request, res = response) => {
   const { id } = req.params;
