@@ -9,8 +9,6 @@ Hemos desarrollado una completa plataforma de comercio electrónico desde cero, 
 Además, hemos implementado un sistema de autenticación de usuarios que permite a los clientes identificarse y acceder a sus cuentas personalizadas. También hemos diseñado una página de administración que facilita la gestión de usuarios, productos y pedidos. Esta herramienta de administración brinda un control total sobre la plataforma, lo que permite una gestión eficiente y una experiencia de usuario excepcional.
 
 ## Tecnologías Utilizadas
-* React
-* Bootstrap
 * Node.js
 * Express
 * MongoDB
@@ -18,7 +16,6 @@ Además, hemos implementado un sistema de autenticación de usuarios que permite
  # devDependencies: 
  
 * JsonWebToken
-* Bcrypt
 * Bcryptjs
 * Cors
 * Dotenv
